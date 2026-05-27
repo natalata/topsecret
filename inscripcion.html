@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strikers Cup 2026 — SCJ</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Syncopate:wght@700&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #020204;
+            --card-surface: rgba(10, 10, 15, 0.94);
+            --striker-green: #00ff66;
+            --striker-orange: #ff4500;
+            --striker-blue: #00d9ff;
+            --striker-yellow: #faff00;
+            --text-primary: #ffffff;
+            --text-secondary: #a4a4b8;
+            --border-glow: #23233a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            overflow-x: hidden;
+            position: relative;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 102, 0.18), transparent 28%),
+                radial-gradient(circle at 80% 30%, rgba(255, 69, 0, 0.2), transparent 30%),
+                linear-gradient(rgba(2, 2, 4, 0.84), rgba(2, 2, 4, 0.96)),
+                url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(
+                    -18deg,
+                    rgba(255, 255, 255, 0.035) 0,
+                    rgba(255, 255, 255, 0.035) 2px,
+                    transparent 2px,
+                    transparent 18px
+                );
+            mix-blend-mode: screen;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.08) 50%, transparent 100%);
+            opacity: 0.6;
+        }
+
+        .master-container {
+            width: 100%;
+            max-width: 1150px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .art-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .scj-badge {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 6px;
+            color: var(--striker-blue);
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            text-shadow: 0 0 16px rgba(0, 217, 255, 0.7);
+        }
+
+        .main-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 6.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            line-height: 0.85;
+            margin-bottom: 24px;
+            text-shadow:
+                4px 4px 0 #000,
+                0 0 28px rgba(255, 69, 0, 0.4);
+        }
+
+        .main-title .white-text {
+            color: #ffffff;
+            display: block;
+        }
+
+        .main-title .orange-text {
+            color: var(--striker-orange);
+            display: block;
+            font-size: 6rem;
+            margin-top: -5px;
+            background: linear-gradient(135deg, var(--striker-orange), var(--striker-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .event-info {
+            max-width: 480px;
+            margin-bottom: 26px;
+            color: #d6d6e8;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            font-weight: 700;
+        }
+
+        .tag {
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            background: rgba(0, 217, 255, 0.08);
+            color: #ffffff;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tag.orange {
+            border-color: rgba(255, 69, 0, 0.45);
+            background: rgba(255, 69, 0, 0.11);
+        }
+
+        .tag.green {
+            border-color: rgba(0, 255, 102, 0.45);
+            background: rgba(0, 255, 102, 0.1);
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 430px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .character-showcase {
+            width: 100%;
+            height: auto;
+            filter:
+                drop-shadow(0 22px 35px rgba(255, 69, 0, 0.45))
+                drop-shadow(0 0 24px rgba(0, 217, 255, 0.25));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .image-container:hover .character-showcase {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .form-side {
+            background:
+                linear-gradient(135deg, rgba(10, 10, 15, 0.96), rgba(20, 20, 30, 0.92)),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.025) 0,
+                    rgba(255, 255, 255, 0.025) 4px,
+                    transparent 4px,
+                    transparent 14px
+                );
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 12px;
+            padding: 45px;
+            position: relative;
+            box-shadow:
+                0 40px 90px rgba(0, 0, 0, 0.85),
+                0 0 35px rgba(0, 217, 255, 0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-side::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 30px;
+            width: 140px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--striker-green), var(--striker-blue));
+            box-shadow: 0 0 16px var(--striker-green);
+        }
+
+        .form-header-text {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--striker-green);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 255, 102, 0.08);
+            border: 1px solid rgba(0, 255, 102, 0.25);
+            padding: 12px 14px;
+            border-radius: 6px;
+        }
+
+        .form-header-text::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--striker-green);
+            box-shadow: 0 0 10px var(--striker-green);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            background-color: rgba(14, 14, 24, 0.86);
+            border: 1px solid #292944;
+            border-radius: 6px;
+            padding: 15px 18px;
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: #696982;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--striker-green);
+            background-color: #121224;
+            box-shadow: 0 0 0 4px rgba(0, 255, 102, 0.12);
+        }
+
+        .form-divider {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            margin: 34px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .form-divider::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--striker-orange), transparent);
+        }
+
+        .roster-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .roster-field {
+            position: relative;
+        }
+
+        .roster-field::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20%;
+            width: 3px;
+            height: 60%;
+            background-color: var(--striker-orange);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.7);
+        }
+
+        .roster-field input {
+            padding-left: 24px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--striker-green), #b6ff00);
+            color: #020204;
+            border: 2px solid #ffffff;
+            border-radius: 6px;
+            padding: 18px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            margin-top: 20px;
+            box-shadow:
+                0 12px 0 #0a5c2b,
+                0 24px 40px rgba(0, 255, 102, 0.22);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #ffffff, var(--striker-blue));
+            color: #020204;
+            transform: translateY(-4px) skewX(-3deg);
+            box-shadow:
+                0 16px 0 #004e5c,
+                0 28px 45px rgba(0, 217, 255, 0.32);
+        }
+
+        .submit-btn:active {
+            transform: translateY(4px) skewX(0);
+            box-shadow:
+                0 6px 0 #0a5c2b,
+                0 14px 26px rgba(0, 255, 102, 0.2);
+        }
+
+        .footer-credits {
+            text-align: center;
+            margin-top: 35px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.52rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 950px) {
+            body {
+                padding: 40px 15px;
+            }
+
+            .master-container {
+                grid-template-columns: 1fr;
+                gap: 42px;
+            }
+
+            .art-side {
+                text-align: center;
+                align-items: center;
+            }
+
+            .main-title {
+                font-size: 5.2rem;
+            }
+
+            .main-title .orange-text {
+                font-size: 4.7rem;
+            }
+
+            .event-info {
+                font-size: 0.92rem;
+            }
+
+            .tag-row {
+                justify-content: center;
+            }
+
+            .form-side {
+                padding: 35px 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                align-items: flex-start;
+                padding: 30px 14px;
+            }
+
+            .scj-badge {
+                font-size: 0.62rem;
+                letter-spacing: 4px;
+            }
+
+            .main-title {
+                font-size: 4.2rem;
+            }
+
+            .main-title .orange-text {
+                font-size: 3.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-side {
+                padding: 30px 20px;
+            }
+
+            .submit-btn {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="master-container">
+
+        <div class="art-side">
+            <div class="scj-badge">Olimpiada de Videojuegos SCJ · Primera Edición</div>
+
+            <h1 class="main-title">
+                <span class="white-text">Strikers</span>
+                <span class="orange-text">Cup 2026</span>
+            </h1>
+
+            <p class="event-info">
+                Forma tu escuadra, elige capitán y entra al torneo escolar más intenso de la cancha.
+            </p>
+
+            <div class="image-container">
+                <img src="ima/4f21dd3f3c50b460aeb480ca61c7d7ac-removebg-preview.png" alt="Personaje estilo Mario Strikers" class="character-showcase">
+            </div>
+        </div>
+
+        <div class="form-side">
+            <form action="https://formspree.io/f/TU_ID_AQUI" method="POST">
+
+                <div class="form-header-text">Fase de Fichaje</div>
+
+                <div class="form-group">
+                    <label for="equipo">Nombre del Club</label>
+                    <input type="text" id="equipo" name="Nombre_Equipo" placeholder="Ej. Toad United, Bowser FC" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Capitán del Equipo</label>
+                    <input type="text" id="nombre" name="Capitan_Nombre" placeholder="Nombre y apellido completo" required>
+                </div>
+
+                <div class="form-group form-row">
+                    <div>
+                        <label for="grado">Grado / Nivel</label>
+                        <select id="grado" name="Grado" required>
+                            <option value="" selected disabled>Elegir...</option>
+                            <option value="1ro Basico">1ro Básico</option>
+                            <option value="2do Basico">2do Básico</option>
+                            <option value="4to Computacion">4to Bach. en Computación</option>
+                            <option value="4to Diseno">4to Bach. en Diseño</option>
+                            <option value="4to Ciencias y Letras">4to Bach. Ciencias y Letras</option>
+                            <option value="4to Magisterio">4to Bach. Magisterio</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="seccion">Sección</label>
+                        <input type="text" id="seccion" name="Seccion" placeholder="Ej. A" required>
+                    </div>
+                </div>
+
+                <div class="form-divider">Plantilla Titular</div>
+
+                <div class="form-group">
+                    <div class="roster-stack">
+                        <div class="roster-field">
+                            <input type="text" name="Jugador_2" placeholder="Jugador 2 — Nombre completo" required>
+                        </div>
+
+                        <div class="roster-field">
+                            <input type="text" name="Jugador_3" placeholder="Jugador 3 — Nombre completo" required>
+                        </div>
+
+                        <div class="roster-field">
+                            <input type="text" name="Jugador_4" placeholder="Jugador 4 — Nombre completo" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Inscribir Equipo</button>
+
+            </form>
+
+            <div class="footer-credits">
+                © 2026 Colegio Sagrado Corazón de Jesús · Esports
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

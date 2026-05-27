@@ -1,0 +1,18 @@
+# STRIKERS CUP - Formulario de Inscripción
+
+¡Todo listo para la primera olimpiada de videojuegos!
+
+## ¿Cómo usar este formulario?
+1. Descomprime esta carpeta.
+2. Abre el archivo `inscripcion.html` en cualquier navegador web para ver cómo quedó el diseño estilo Mario Strikers.
+
+## ¿Cómo activar el envío de respuestas por correo?
+Actualmente el formulario está listo para producción, pero necesitas enlazarlo a tu cuenta para que te lleguen los datos gratis:
+1. Entra a https://formspree.io/ y crea una cuenta gratis.
+2. Crea un nuevo formulario ("New Form") y te darán un enlace único (ejemplo: `https://formspree.io/f/xknwllza`).
+3. Abre el archivo `inscripcion.html` con un editor de notas o código (como Bloc de notas, VS Code, etc.).
+4. Busca la línea:
+   <form action="https://formspree.io/f/TU_ID_AQUI" method="POST">
+5. Cambia `https://formspree.io/f/TU_ID_AQUI` por el enlace que te dio Formspree y guarda el archivo.
+
+¡Listo! Cada vez que alguien se registre, te llegará la notificación de inmediato. ¡A romperla en el torneo!
