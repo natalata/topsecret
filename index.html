@@ -474,8 +474,7 @@
         </div>
 
         <div class="form-side">
-            <form action="https://formspree.io/f/mqejwnnz" method="POST">
-            <input type="hidden" name="_next" value="https://natalata.github.io/striker-cup-inscrito/">
+            <form id="strikerForm" action="https://formspree.io/f/mqejwnnz" method="POST">
                 <div class="form-header-text">Fase de Fichaje</div>
 
                 <div class="form-group">
@@ -488,7 +487,6 @@
                     <input type="text" id="nombre" name="Capitan_Nombre" placeholder="Nombre y apellido completo" required>
                 </div>
 
-                <!-- NUEVO CAMPO: CORREO DEL CAPITÁN -->
                 <div class="form-group">
                     <label for="correo">Correo Electrónico del Capitán</label>
                     <input type="email" id="correo" name="Capitan_Correo" placeholder="ejemplo@correo.com" required>
@@ -532,7 +530,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn">Inscribir Equipo</button>
+                <button type="submit" id="submitBtn" class="submit-btn">Inscribir Equipo</button>
 
             </form>
 
@@ -542,6 +540,39 @@
         </div>
 
     </div>
+
+    <script>
+        document.getElementById("strikerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var form = event.target;
+            var button = document.getElementById("submitBtn");
+            var data = new FormData(form);
+            
+            button.disabled = true;
+            button.innerText = "PROCESANDO...";
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(function(response) {
+                if (response.ok) {
+                    window.location.href = "https://natalata.github.io/striker-cup-inscrito/";
+                } else {
+                    alert("Hubo un problema con el envío. Inténtalo de nuevo.");
+                    button.disabled = false;
+                    button.innerText = "Inscribir Equipo";
+                }
+            }).catch(function(error) {
+                alert("Error de conexión. Inténtalo de nuevo.");
+                button.disabled = false;
+                button.innerText = "Inscribir Equipo";
+            });
+        });
+    </script>
 
 </body>
 </html>
