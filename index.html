@@ -74,6 +74,17 @@
             opacity: 0.6;
         }
 
+        /* --- CLASE NUEVA PARA EL LOGO --- */
+        .corner-logo {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 110px;
+            height: auto;
+            z-index: 10;
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
+        }
+
         .master-container {
             width: 100%;
             max-width: 1150px;
@@ -382,7 +393,14 @@
 
         @media (max-width: 950px) {
             body {
-                padding: 40px 15px;
+                padding: 100px 15px 40px 15px; /* Aumentado top padding para dar espacio al logo en tablets */
+            }
+
+            /* Reducción sutil del logo en tabletas */
+            .corner-logo {
+                width: 95px;
+                top: 20px;
+                left: 20px;
             }
 
             .master-container {
@@ -419,7 +437,14 @@
         @media (max-width: 600px) {
             body {
                 align-items: flex-start;
-                padding: 30px 14px;
+                padding: 90px 14px 30px 14px; /* Ajuste para móviles */
+            }
+
+            /* Logo más pequeño y centrado/adaptado en pantallas muy chicas si es necesario, o en la esquina superior izquierda reducida */
+            .corner-logo {
+                width: 80px;
+                top: 15px;
+                left: 15px;
             }
 
             .scj-badge {
@@ -453,6 +478,8 @@
 </head>
 
 <body>
+
+    <img src="ima/LOGO SCJ BLANCO SIN FONDO 3.png" alt="Logo Colegio SCJ" class="corner-logo">
 
     <div class="master-container">
 
