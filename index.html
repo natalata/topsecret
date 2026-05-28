@@ -260,6 +260,7 @@
         }
 
         input[type="text"],
+        input[type="email"],
         select {
             width: 100%;
             background-color: rgba(14, 14, 24, 0.86);
@@ -273,11 +274,13 @@
             transition: all 0.25s ease;
         }
 
-        input[type="text"]::placeholder {
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder {
             color: #696982;
         }
 
         input[type="text"]:focus,
+        input[type="email"]:focus,
         select:focus {
             outline: none;
             border-color: var(--striker-green);
@@ -471,7 +474,7 @@
         </div>
 
         <div class="form-side">
-            <form action="https://formspree.io/f/TU_ID_AQUI" method="POST">
+            <form action="https://formspree.io/f/mqejwnnz" method="POST">
 
                 <div class="form-header-text">Fase de Fichaje</div>
 
@@ -483,6 +486,12 @@
                 <div class="form-group">
                     <label for="nombre">Capitán del Equipo</label>
                     <input type="text" id="nombre" name="Capitan_Nombre" placeholder="Nombre y apellido completo" required>
+                </div>
+
+                <!-- NUEVO CAMPO: CORREO DEL CAPITÁN -->
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico del Capitán</label>
+                    <input type="email" id="correo" name="Capitan_Correo" placeholder="ejemplo@correo.com" required>
                 </div>
 
                 <div class="form-group form-row">
